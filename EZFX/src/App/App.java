@@ -15,7 +15,8 @@ public class App extends Application {
 
 	private SceneManager sceneManager = SceneManager.getSceneManager();
 	
-	
+	//JAD THIS IS A TEST TEST WITTH  ME PLZ 
+
 	@Override
 	public void start(Stage window) throws Exception {
 		Window = window;
