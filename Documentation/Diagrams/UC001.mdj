@@ -7392,7 +7392,7 @@
 											"top": 236,
 											"width": 130,
 											"height": 15,
-											"text": "Access Blueprints"
+											"text": "Open Blueprints"
 										},
 										{
 											"_type": "LabelView",
@@ -7428,7 +7428,7 @@
 									"font": "Arial;15;0",
 									"left": 733.5,
 									"top": 229,
-									"width": 140.8837890625,
+									"width": 140,
 									"height": 27,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFn9tcSTFGuQAs="
@@ -10107,7 +10107,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Access Blueprints",
+					"name": "Open Blueprints",
 					"ownedElements": [
 						{
 							"_type": "UMLExtend",
