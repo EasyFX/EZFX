@@ -1,0 +1,5 @@
+Button C:\Users\georg\eclipse-workspace\EZFX\msg.png javafx.scene.control.Button Inputs
+TextField C:\Users\georg\eclipse-workspace\EZFX\msg.png javafx.scene.control.TextField Inputs
+HBox C:\Users\georg\eclipse-workspace\EZFX\msg.png javafx.scene.layout.HBox Layouts
+VBox C:\Users\georg\eclipse-workspace\EZFX\msg.png javafx.scene.layout.VBox Layouts
+Group C:\Users\georg\eclipse-workspace\EZFX\msg.png javafx.scene.Group Layouts

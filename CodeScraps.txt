@@ -1,0 +1,35 @@
+private void read(BufferedReader bufferedReader, Parent root) {
+		try {
+			Stack<Parent> nodes = new Stack<>();
+			nodes.add(root);
+			Parent currentRoot = nodes.pop();
+
+			String Line = null;
+			while ((Line = bufferedReader.readLine()) != null) {
+				if (Line.trim().startsWith("<")) {
+					String Line2 = Line.trim().split(" ")[0].substring(1);
+					Node node = (Node) Class.forName(Line2).newInstance();
+
+					if (currentRoot instanceof Pane)
+						((Pane) currentRoot).getChildren().add(node);
+					else
+						((Group) currentRoot).getChildren().add(node);
+
+					if (node instanceof Parent && !(node instanceof Control)) {
+
+						nodes.add(currentRoot);
+						currentRoot = (Parent) node;
+					}
+					setAttributes(node, Line);
+				} else if (Line.endsWith(">")) {
+					Parent parent = nodes.pop();
+					if (parent instanceof Pane)
+						currentRoot = (Pane) parent;
+					else
+						currentRoot = parent;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
