@@ -9,9 +9,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
+import BlueprintScene.BluePrintScene;
 import FirstScene.EntityExplorer;
 import FirstScene.FirstScene;
 import Loaders.ItemLoader;
+import Scene.SceneManager;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -170,6 +172,17 @@ public class TreeReader {
 				FirstScene.attributesPanel.setAttributes(null, new String[0]);
 			}
 		});
+		try {
+			if(BluePrintScene.nodeExplorer == null) {
+				FirstScene.entityExplorer.Chosen = newNode ;
+				SceneManager.getSceneManager().refreshBlueprint();
+			}
+			Node BlueprintNode = node.getClass().newInstance();
+			BlueprintNode.setId(newNode.getId() + "BID");
+			BluePrintScene.nodeExplorer.addNode(string,image,BlueprintNode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if (node instanceof Parent)
 			return treeItem;
 		else

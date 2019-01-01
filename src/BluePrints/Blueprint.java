@@ -3,19 +3,28 @@ package BluePrints;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Font;
 
 public class Blueprint {
 
+	private boolean isDraging = false;
+	private double X1, Y1, X2, Y2;
+	private static int ID = 0;
+
+	private int BlueprintID;
 	private EventHandler<Event> Event;
 	private String EventName;
 	private Image EventImage;
@@ -23,26 +32,33 @@ public class Blueprint {
 	private Color BackgroundColor;
 	private StackPane stackPane;
 	private Rectangle rectangle = new Rectangle();
+	private Object[] InputObjects, OutputObjects;
 	private boolean Changed = false;
+	private Group group;
 
 	public Blueprint(String eventName, Image eventImage, EventHandler<Event> event, int inputCount, int outputCount,
 			Color backgrouncolor) {
+		ID++;
+		BlueprintID = ID;
 		Event = event;
 		EventName = eventName;
 		EventImage = eventImage;
 		InputCount = inputCount;
 		OutputCount = outputCount;
 		BackgroundColor = backgrouncolor;
+		InputObjects = new Object[InputCount];
+		OutputObjects = new Object[OutputCount];
 
 		rectangle.setFill(BackgroundColor);
 
 		stackPane = new StackPane();
+		group = new Group(stackPane);
 
 		HBox hBox = new HBox();
 
 		VBox Input = new VBox();
 		for (int i = 0; i < InputCount; i++) {
-			Circle circle = new Circle(5);
+			Circle circle = makeDOT("Input", i);
 			Input.getChildren().add(circle);
 			circle.setFill(Color.BLACK);
 			circle.setStroke(Color.BLACK);
@@ -56,7 +72,7 @@ public class Blueprint {
 
 		VBox Output = new VBox();
 		for (int i = 0; i < OutputCount; i++) {
-			Circle circle = new Circle(5);
+			Circle circle = makeDOT("Output", i);
 			Output.getChildren().add(circle);
 			circle.setFill(Color.BLACK);
 			circle.setStroke(Color.BLACK);
@@ -95,17 +111,11 @@ public class Blueprint {
 	}
 
 	public EventHandler<Event> getEvent() {
-
-		System.out.println(stackPane.getPrefHeight());
 		return Event;
 	}
 
-	public HBox toEntry() {
-		return new HBox(new ImageView(EventImage), new Label(EventName));
-	}
-
-	public StackPane getBlueprint() {
-		return stackPane;
+	public Group getBlueprint() {
+		return group;
 	}
 
 	public String getEventName() {
@@ -160,4 +170,43 @@ public class Blueprint {
 		Event = event;
 	}
 
+	public int getBlueprintID() {
+		return BlueprintID;
+	}
+
+	private Circle makeDOT(String string, int i) {
+		Circle circle = new Circle(5);
+		circle.setId(BlueprintID + string + i);
+		circle.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+			X1 = event.getSceneX();
+			Y1 = event.getSceneY();
+			isDraging = true;
+		});
+		circle.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
+			if(!(event.getPickResult().getIntersectedNode() instanceof Circle))
+				return;
+			
+			X2 = event.getSceneX();
+			Y2 = event.getSceneY();
+			isDraging = false;
+			Line line = new Line(X1, Y1, X2, Y2);
+			group.getChildren().add(line);
+			line.setTranslateX(line.getTranslateX() - group.getTranslateX());
+			line.setTranslateY(line.getTranslateY() - group.getTranslateY());
+
+			line.setSmooth(true);
+			line.setStrokeWidth(5);
+			line.setStrokeLineCap(StrokeLineCap.ROUND);
+			
+			line.toBack();
+			
+			if (string.equals("Input")) {
+				line.getStrokeDashArray().addAll(15.0);
+				line.setStroke(Color.DARKORANGE);
+			}
+
+		});
+
+		return circle;
+	}
 }

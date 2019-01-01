@@ -112,6 +112,7 @@ public class HierarchyTree extends VBox {
 			}
 
 		});
+		
 		treeItem.setExpanded(true);
 		return treeItem;
 	}

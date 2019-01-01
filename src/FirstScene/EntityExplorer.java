@@ -135,7 +135,7 @@ public class EntityExplorer extends VBox {
 			try {
 				if(BluePrintScene.nodeExplorer == null) {
 					Chosen = newNode ;
-					SceneManager.getSceneManager().changeScene(2);
+					SceneManager.getSceneManager().refreshBlueprint();
 				}
 				Node BlueprintNode = node.getClass().newInstance();
 				BlueprintNode.setId(newNode.getId() + "BID");

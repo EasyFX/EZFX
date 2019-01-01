@@ -5,6 +5,7 @@ import Utils.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -14,8 +15,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class NodeExplorer extends VBox {
 
@@ -60,7 +64,12 @@ public class NodeExplorer extends VBox {
 	}
 
 	public void addNode(String string, Image image, Node node) {
-		NodeList.add(new HBox(new ImageView(image), new Label(string + " " + node.getId().replace("BID", ""))));
+		Region region = new Region();
+		HBox hBox = new HBox(new ImageView(image), new Label(string + " " + node.getId().replace("BID", "")),region,new Circle(5));
+		HBox.setHgrow(region, Priority.ALWAYS);
+		hBox.setAlignment(Pos.CENTER_LEFT);
+		
+		NodeList.add(hBox);
 	}
 
 	public void removeNode(Node node) {

@@ -45,6 +45,7 @@ public class Canvas extends Pane {
 		
 		FirstScene.hierarchyTree.setMainBox(vbox);
 		addItem(vbox);
+		
 	}
 
 	public void addItem(Node node) {
@@ -61,4 +62,5 @@ public class Canvas extends Pane {
 		}
 		return true;
 	}
+	
 }

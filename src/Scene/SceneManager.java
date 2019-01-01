@@ -12,7 +12,7 @@ public class SceneManager {
 	private static List<Scene> scenes = new ArrayList<>();
 	private static SceneManager sceneManager;
 	public static Scene CurrentScene;
-	
+	private int BLueprintSceneIndex=0;
 	private SceneManager() {
 		
 	}	
@@ -32,9 +32,14 @@ public class SceneManager {
 	
 	public void addScene(Scene scene) {
 		scenes.add(scene);
+		if(scene instanceof BluePrintScene)
+			BLueprintSceneIndex = scenes.size()-1;
 	}
 	
-	
+	public void refreshBlueprint() {
+		scenes.get(BLueprintSceneIndex).setRoot(new Group());
+		scenes.set(BLueprintSceneIndex, new BluePrintScene());		
+	}
 	
 	public static SceneManager getSceneManager() {
 		if(sceneManager == null)

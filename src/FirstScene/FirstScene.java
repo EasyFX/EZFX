@@ -18,7 +18,8 @@ public class FirstScene extends Scene {
 	public static Canvas canvas;
 	public static HierarchyTree hierarchyTree;
 	public static Group TheFirstOne = new Group();
-
+	
+	private Scene scene;
 	public FirstScene() {
 		super(TheFirstOne, App.Window.getWidth(), App.Window.getHeight());
 		setFill(Constants.FIRST_SCENE_BACKGROUND_COLOR);
@@ -29,8 +30,12 @@ public class FirstScene extends Scene {
 		hierarchyTree = new HierarchyTree();
 		attributesPanel = new AttributesPanel();
 		canvas = new Canvas();
-		TheFirstOne.getChildren().addAll(topBar, entityExplorer, hierarchyTree , attributesPanel, canvas);
-
+		TheFirstOne.getChildren().addAll(topBar, entityExplorer, hierarchyTree, attributesPanel, canvas);
+		
+		scene = this;
 	}
-
+	
+	public Scene getScene() {
+		return scene;
+	}
 }

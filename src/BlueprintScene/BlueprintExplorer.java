@@ -1,11 +1,13 @@
 package BlueprintScene;
 
 import App.App;
+import BluePrints.Blueprint;
 import BluePrints.BlueprintCollection;
 import Utils.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.Group;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -27,12 +29,21 @@ public class BlueprintExplorer extends VBox {
 		setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 	}
 
+	static {
+		setupActualListItems();
+	}
+	
 	private void setupList() {
 
 		getChildren().add(BlueprintListView);
 
 		BlueprintListView.prefWidthProperty().bind(widthProperty());
 		BlueprintListView.prefHeightProperty().bind(heightProperty());
+	}
+
+	
+	
+	private static void setupActualListItems() {
 
 		BlueprintListView.setItems(BlueprintList);
 
@@ -40,16 +51,16 @@ public class BlueprintExplorer extends VBox {
 			BlueprintListView.refresh();
 		});
 
-		HBox hBox = BlueprintCollection.BP_Add.toEntry();
+		HBox hBox = BlueprintCollection.BP_ADD_BUILDER.toEntry();
 		BlueprintList.add(hBox);
 		hBox.setOnMouseReleased(event -> {
+			Blueprint blueprint = BlueprintCollection.BP_ADD_BUILDER.build();
 			BlueprintsAdded.add(hBox);
-			StackPane stackPane = BlueprintCollection.BP_Add.getBlueprint();
-			stackPane.setTranslateX(event.getSceneX());
-			stackPane.setTranslateY(event.getSceneY());
-			BluePrintScene.blueprintRoot.getChildren().add(stackPane);
+			Group group = blueprint.getBlueprint();
+			group.setTranslateX(event.getSceneX());
+			group.setTranslateY(event.getSceneY());
+			BluePrintScene.blueprintRoot.getChildren().add(group);
 		});
-
 	}
 
 	private void setupDimensions() {
