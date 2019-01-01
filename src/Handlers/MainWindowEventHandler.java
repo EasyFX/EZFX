@@ -1,7 +1,7 @@
 package Handlers;
 
 import App.App;
-import InsideWindows.AttributesPanel;
+import FirstScene.AttributesPanel;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -16,9 +16,6 @@ public class MainWindowEventHandler {
 		if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.F) {
 			AttributesPanel.searchField.requestFocus();
 		}
-		
-		
-		
 	};
 
 

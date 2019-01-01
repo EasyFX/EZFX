@@ -1,32 +1,27 @@
 package SaveLoadTree;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
+import Loaders.MethodFilter;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Control;
 
 public class TreeWriter {
-	
+
 	private String Path;
-	private List<String> methodFilters = new ArrayList<>();
 
 	public TreeWriter(String Path) {
 		this.Path = Path;
-		loadMethodFilters("./saveFilters.filters");
 	}
-	
+
 	public void writeTree(Parent root) {
 		try {
-			double x = root.getTranslateX(),y=root.getTranslateY();
-			
+			double x = root.getTranslateX(), y = root.getTranslateY();
+
 			root.setTranslateX(0);
 			root.setTranslateY(0);
 			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(Path)));
@@ -34,7 +29,7 @@ public class TreeWriter {
 			bufferedWriter.close();
 			root.setTranslateX(x);
 			root.setTranslateY(y);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,27 +93,11 @@ public class TreeWriter {
 		}
 	}
 
-	
-
 	private boolean check(Method method) {
 		if (method.getName().startsWith("get") && method.getParameterCount() == 0 && !method.getName().contains("getOn")
-				&& !methodFilters.contains(method.getName()))
+				&& !MethodFilter.contains(method.getName()))
 			return true;
 		return false;
-	}
-
-	private void loadMethodFilters(String FilterPath) {
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(FilterPath)));
-			String Line;
-			while ((Line = bufferedReader.readLine()) != null) {
-				methodFilters.add(Line);
-			}
-			bufferedReader.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }

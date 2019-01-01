@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import InsideWindows.FirstScene;
+import FirstScene.FirstScene;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 

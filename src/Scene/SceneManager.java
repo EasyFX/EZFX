@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import App.App;
-import InsideWindows.BluePrintScene;
+import BlueprintScene.BluePrintScene;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 

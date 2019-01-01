@@ -9,4 +9,7 @@ public abstract class Constants {
 
 	public static final Color FIRST_SCENE_BACKGROUND_COLOR = Color.rgb(40, 40, 40);
 
+	public static final String METHOD_FILTER_PATH = "./saveFilters.filters",
+			ATTRIBUTES_FILTER_PATH = "./AttributesFilter.filters";
+
 }

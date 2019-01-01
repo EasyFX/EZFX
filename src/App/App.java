@@ -2,10 +2,12 @@ package App;
 
 import java.awt.Toolkit;
 
+import BlueprintScene.BluePrintScene;
+import FirstScene.FirstScene;
 import Handlers.MainWindowEventHandler;
-import InsideWindows.BluePrintScene;
-import InsideWindows.FirstScene;
+import Loaders.AttributesFilter;
 import Loaders.ItemLoader;
+import Loaders.MethodFilter;
 import Scene.SceneManager;
 import Utils.Constants;
 import javafx.application.Application;
@@ -16,6 +18,11 @@ public class App extends Application {
 	public static MainWindowEventHandler mainWindowEventHandler;
 
 	private SceneManager sceneManager = SceneManager.getSceneManager();
+
+	static {
+		MethodFilter.loadMethodFilters(Constants.METHOD_FILTER_PATH);
+		AttributesFilter.loadAttributesFilters(Constants.ATTRIBUTES_FILTER_PATH);
+	}
 
 	@Override
 	public void start(Stage window) throws Exception {

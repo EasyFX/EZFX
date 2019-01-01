@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import InsideWindows.EntityExplorer;
-import InsideWindows.FirstScene;
+import FirstScene.EntityExplorer;
+import FirstScene.FirstScene;
 import Loaders.ItemLoader;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
