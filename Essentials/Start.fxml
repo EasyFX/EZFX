@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="581.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="Controller.LoginController">
+<Pane prefHeight="581.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="Controller.StartController">
    <children>
       <Circle fx:id="profile_circle" fill="#ff7a29" layoutX="200.0" layoutY="217.0" opacity="0.0" radius="169.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle fx:id="topBar" arcHeight="5.0" arcWidth="5.0" height="86.0" layoutX="34.0" layoutY="32.0" opacity="0.0" rotate="30.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
@@ -28,7 +28,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Button>
-      <Button fx:id="b_login" layoutX="113.0" layoutY="167.0" mnemonicParsing="false" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" prefHeight="39.0" prefWidth="87.0" style="-fx-background-color: black;" text="Login" textFill="#ffc464">
+      <Button fx:id="b_login" layoutX="113.0" layoutY="167.0" mnemonicParsing="false" onAction="#login" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" prefHeight="39.0" prefWidth="87.0" style="-fx-background-color: black;" text="Login" textFill="#ffc464">
          <font>
             <Font name="Leelawadee UI Bold" size="18.0" />
          </font>
@@ -36,7 +36,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Button>
-      <Button fx:id="b_reg" layoutX="69.0" layoutY="244.0" mnemonicParsing="false" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" style="-fx-background-color: black;" text="Register" textFill="#ffc464">
+      <Button fx:id="b_reg" layoutX="69.0" layoutY="244.0" mnemonicParsing="false" onAction="#register" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" style="-fx-background-color: black;" text="Register" textFill="#ffc464">
          <font>
             <Font name="Leelawadee UI Bold" size="18.0" />
          </font>
