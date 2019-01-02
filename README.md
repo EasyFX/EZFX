@@ -1,4 +1,4 @@
-# EZFX v1.2.1
+# EZFX v1.2.8
 
 
 ![Logo](https://i.imgur.com/Yk6R2Hv.png)
@@ -10,6 +10,10 @@
   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.1.4: Use cases
 ##### v1.2.x - initial login sequence
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.1: Re-writing spaghetti code from v0.x into proper design patterns
-   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.2: Class diagrams
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.2: Class diagram
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.3: Adding front-end work and icons
-
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.4: User manual and MIT License
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.5: User accounts database
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.6: Extending class diagram
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.7: Added all needed FXML pages
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.8: Finished login sequence
