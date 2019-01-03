@@ -69,7 +69,7 @@
          </font>
       </Text>
       <TextField fx:id="input_path" layoutX="166.0" layoutY="346.0" opacity="0.0" prefHeight="25.0" prefWidth="184.0" />
-      <CheckBox fx:id="news" layoutX="167.0" layoutY="394.0" mnemonicParsing="false" onAction="#newsletter" opacity="0.0" text="Newsletter" textFill="WHITE" />
+      <CheckBox fx:id="news" layoutX="167.0" layoutY="394.0" mnemonicParsing="false" opacity="0.0" text="Newsletter" textFill="WHITE" />
       <Button fx:id="b_browse" layoutX="367.0" layoutY="346.0" mnemonicParsing="false" onAction="#browse" opacity="0.0" text="Browse" />
    </children>
 </Pane>
