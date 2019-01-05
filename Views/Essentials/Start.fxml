@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="581.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="Controller.StartController">
+   <children>
+      <Circle fx:id="profile_circle" fill="#ff7a29" layoutX="200.0" layoutY="217.0" opacity="0.0" radius="169.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="topBar" arcHeight="5.0" arcWidth="5.0" height="86.0" layoutX="34.0" layoutY="32.0" opacity="0.0" rotate="30.0" stroke="BLACK" strokeType="INSIDE" width="353.0" />
+      <Rectangle fx:id="sideBar" arcHeight="5.0" arcWidth="5.0" height="93.0" layoutX="213.0" layoutY="431.0" opacity="0.0" rotate="30.0" stroke="BLACK" strokeType="INSIDE" width="246.0" />
+      <Rectangle fx:id="mainBarGlow" arcHeight="5.0" arcWidth="5.0" fill="#d07003" height="17.0" layoutX="243.0" layoutY="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="17.0" />
+      <Rectangle fx:id="mainBarGlow2" arcHeight="5.0" arcWidth="5.0" fill="#d07003" height="17.0" layoutX="243.0" layoutY="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="17.0" />
+      <Rectangle fx:id="mainBar" arcHeight="5.0" arcWidth="5.0" height="512.0" layoutX="150.0" layoutY="22.0" opacity="0.05" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+      <Rectangle fx:id="optionBar1" arcHeight="5.0" arcWidth="5.0" height="59.0" layoutX="144.0" layoutY="83.0" opacity="0.0" rotate="-60.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
+      <Rectangle fx:id="optionBar2" arcHeight="5.0" arcWidth="5.0" height="59.0" layoutX="100.0" layoutY="158.0" opacity="0.0" rotate="-60.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
+      <Rectangle fx:id="optionBar3" arcHeight="5.0" arcWidth="5.0" height="59.0" layoutX="55.0" layoutY="235.0" opacity="0.0" rotate="-60.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
+      <Button fx:id="b_guest" layoutX="161.0" layoutY="92.0" mnemonicParsing="false" onAction="#guestLoggingIn" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" style="-fx-background-color: #000000;" text="Guest" textFill="#ffc464">
+         <font>
+            <Font name="Leelawadee UI Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="b_login" layoutX="113.0" layoutY="167.0" mnemonicParsing="false" onAction="#login" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" prefHeight="39.0" prefWidth="87.0" style="-fx-background-color: black;" text="Login" textFill="#ffc464">
+         <font>
+            <Font name="Leelawadee UI Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="b_reg" layoutX="69.0" layoutY="244.0" mnemonicParsing="false" onAction="#register" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" style="-fx-background-color: black;" text="Register" textFill="#ffc464">
+         <font>
+            <Font name="Leelawadee UI Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="img_E" fitHeight="86.0" fitWidth="87.0" layoutX="257.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="img_Z" fitHeight="86.0" fitWidth="87.0" layoutX="257.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="img_F" fitHeight="86.0" fitWidth="87.0" layoutX="257.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="img_X" blendMode="SRC_ATOP" fitHeight="86.0" fitWidth="87.0" layoutX="257.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="icon_settings" fitHeight="50.0" fitWidth="50.0" layoutX="276.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="text_name" layoutX="54.0" layoutY="182.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="text_email" layoutX="54.0" layoutY="222.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+      <Button fx:id="b_back" layoutX="369.0" layoutY="458.0" mnemonicParsing="false" onAction="#loggingOut" onMouseEntered="#buttonHoverOn" onMouseExited="#buttonHoverOff" opacity="0.0" style="-fx-background-color: #000000;" text="Back" textFill="#ffc464">
+         <font>
+            <Font name="Leelawadee UI Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </Button>
+   </children>
+</Pane>
