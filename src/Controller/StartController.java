@@ -27,8 +27,8 @@ import javafx.scene.Parent;
 import javafx.scene.text.Text;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 
 public class StartController implements Initializable{
 	
@@ -79,7 +79,7 @@ public class StartController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		setConstructor();
 		
 		//Packing up sets:
@@ -87,6 +87,9 @@ public class StartController implements Initializable{
 		Rectangle[] optionsSet = {optionBar1,optionBar2,optionBar3};
 		Button[] buttonSet = {b_guest,b_login,b_reg,b_back};
 		ImageView[] imgSet = {img_E,img_Z,img_F,img_X,icon_settings};
+		
+		//Minor permanent adjustments:
+		profile_circle.setStroke(null);
 		
 		//Setting images:
 		img_E.setImage(imgHandler.getImage("Views/img/logo_Letter_E.png"));

@@ -9,6 +9,8 @@ public class User {
 	private String email;
 	private String pref_path;
 	private String password;
+	private static boolean newsLetter;
+	private static boolean remindMe;
 	
 	public boolean isSet = false;
 	
@@ -19,12 +21,14 @@ public class User {
         static final User INSTANCE = new User();
     }
     
-    public static User getInstance(String name, String email, String pref_path, String password) {
-    	LazyHolder.INSTANCE.setName(name);
-    	LazyHolder.INSTANCE.setEmail(email);
-    	LazyHolder.INSTANCE.setPref_path(pref_path);
-    	LazyHolder.INSTANCE.setPassword(password);
-        LazyHolder.INSTANCE.isSet = true;
+    public static User getInstance(String name, String email, String pref_path, String password, boolean newsletter, boolean remindme) {
+		LazyHolder.INSTANCE.setName(name);
+		LazyHolder.INSTANCE.setEmail(email);
+		LazyHolder.INSTANCE.setPref_path(pref_path);
+		LazyHolder.INSTANCE.setPassword(password);
+		User.setNewsLetter(newsletter);
+		User.setremindMe(remindme);
+		LazyHolder.INSTANCE.isSet = true;
     	
     	return LazyHolder.INSTANCE;
     }
@@ -68,5 +72,25 @@ public class User {
 	private void setName(String name) {
 		this.name = name;
 	}
+	
+	public static boolean getNewsLetter() {
+		return newsLetter;
+	}
+	
+	private static void setNewsLetter(boolean value) {
+		User.newsLetter = value;
+	}
+	
+	public static boolean getremindMe() {
+		return remindMe;
+	}
+	
+	private static void setremindMe(boolean value) {
+		User.remindMe = value;
+	}
+	
+	
+	
+	
     
 }

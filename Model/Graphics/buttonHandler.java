@@ -13,7 +13,7 @@ public class buttonHandler {
 	static AnimationFactory factory = new AnimationFactory();
 
 	public static void glowButton(Button b) {
-		if(b.getOpacity() == 0) {
+		if(b.getOpacity() == 1) {
 			b.setStyle("-fx-background-color: #111111");
 			b.setTextFill(Color.WHITE);
 			factory.buildScale(b, 300, 0, 1, 1, 1.2, 1.2, 0.1, 0.1, 1, false).play();
@@ -21,7 +21,7 @@ public class buttonHandler {
 	}
 	
 	public static void unglowButton(Button b) {
-		if(b.getOpacity() == 0) {
+		if(b.getOpacity() == 1) {
 			b.setStyle("-fx-background-color: #000000");
 			b.setTextFill(Color.rgb(255, 196, 100));
 			factory.buildScale(b, 300, 0, 1.2, 1.2, 1, 1, 0.1, 0.1, 1, false).play();

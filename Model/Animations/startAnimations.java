@@ -79,7 +79,7 @@ public class startAnimations {
 	public static SequentialTransition getQuickSequenceA(Rectangle[] set, ImageView[] setI, int delay){
 		
 		return new SequentialTransition(
-				factory.buildScale(set[0], 1000, 0, 1, 1, 0.3333, 1, 1, 0.1, 1, false),
+				factory.buildScale(set[0], 600, 0, 1, 1, 0.3333, 1, 1, 0.1, 1, false),
 				factory.buildRotate(set[0], 300, 500, 30, null, 1, false),
 				AnimationFactory.buildSequential(
 						AnimationFactory.buildPause(200),
@@ -101,10 +101,10 @@ public class startAnimations {
 		return new SequentialTransition(
 			AnimationFactory.buildPause(delay),
 			AnimationFactory.buildParallel(
-					factory.buildFade(set[3], 500, 0, 1.0, 0.0, 0.1, 1, false),
-					factory.buildRotate(set[3], 300, 500, 30, null, 1, false)
+					factory.buildFade(set[3], 300, 0, 1.0, 0.0, 0.1, 1, false),
+					factory.buildRotate(set[3], 200, 0, 30, null, 1, false)
 			),
-			factory.buildRotate(set[0], 100, 500, -30, null, 1, false),
+			factory.buildRotate(set[0], 100, 0, -30, null, 1, false),
 			AnimationFactory.buildSequential(
 					factory.buildFade(setI[0], 200, 0, 0.1, 0.0, 1.0, 1, false),
 					factory.buildFade(setI[1], 200, 0, 0.1, 0.0, 1.0, 1, false),

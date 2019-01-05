@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
@@ -39,9 +40,9 @@ public class LoginController extends sideController implements Initializable {
 	
 	private DBController DBC = DBController.getInstance();
 	
+	
 	@FXML
 	private void login(ActionEvent event) {
-		DBC.setupConnection();
 		
 		String user = input_username.getText();
 		String pass = input_password.getText();
@@ -50,16 +51,21 @@ public class LoginController extends sideController implements Initializable {
 			text_error.setText("Fields can not be empty");
 		}
 		
-		
-		//Parent root = null;
-		//try {
-		//	root = rLink.getRoot("./Start.fxml");
-		//} catch (Exception e) {
-		//	System.out.println("Error A3: FXML fail");
-		//	e.printStackTrace();
-		//}
-		//Driver.switchScene(root);
-		//Driver.controller.reConstruct(1);
+		else {
+			
+			if(DBC.checkLogin(DBC.select(DBC.setupConnection(), "*", "user", null), user, pass)) {
+				
+				Parent root = null;
+				try {
+					root = getLink().getRoot("./Start.fxml");
+				} catch (Exception e) {
+					System.out.println("Error A3: FXML fail");
+					e.printStackTrace();
+				}
+				Driver.switchScene(root);
+				Driver.controller.reConstruct(1);
+			}			
+		}	
 	}
 	
 	@Override
