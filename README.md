@@ -1,4 +1,4 @@
-# EZFX v1.2.8
+# EZFX v1.3.5
 
 
 ![Logo](https://i.imgur.com/Yk6R2Hv.png)
@@ -17,3 +17,12 @@
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.6: Extending class diagram
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.7: Added all needed FXML pages
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.2.8: Finished login sequence
+##### v1.3.x - User manual& bug fixes
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.1: Error list
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.2: Procedures list
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.3: Introduction
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.4: Fixed minor DB bugs
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.5: Adjusted dead links with some buttons
+   
+   
+
