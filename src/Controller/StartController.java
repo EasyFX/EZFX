@@ -163,7 +163,7 @@ public class StartController implements Initializable{
 		Button[] buttonSet = {b_guest,b_login,b_reg,b_back};
 		Rectangle[] glowBarSet = {mainBar,mainBarGlow,mainBarGlow2,sideBar};
 		ImageView[] imgSet = {img_E,img_Z,img_F,img_X,icon_settings};
-			
+		
 		Parent root = null;
 		try {
 			root = rLink.getRoot("./Register.fxml");
@@ -175,7 +175,7 @@ public class StartController implements Initializable{
 		
 		hideLogins(optionsSet,buttonSet);
 		
-		SequentialTransition trans = startAnimations.getUndoSequenceA(glowBarSet, imgSet, 3500);
+		SequentialTransition trans = startAnimations.getUndoSequenceA(glowBarSet, imgSet, 800);
 		trans.setOnFinished(e -> Driver.switchScene(root2));
 		trans.play();
 	}
@@ -198,7 +198,7 @@ public class StartController implements Initializable{
 		
 		hideLogins(optionsSet,buttonSet);
 		
-		SequentialTransition trans = startAnimations.getUndoSequenceA(glowBarSet, imgSet, 2500);
+		SequentialTransition trans = startAnimations.getUndoSequenceA(glowBarSet, imgSet, 500);
 		trans.setOnFinished(e -> Driver.switchScene(root2));
 		trans.play();
 	}
@@ -222,7 +222,14 @@ public class StartController implements Initializable{
 		if(status==0) {
 			showLogins(optionsSet,buttonSet);
 		}
-		else showProfile(profileSet,profileText);
+		else {			
+			showProfile(profileSet,profileText);
+			
+			String[] fillerText = {"Name: Guest","Email: N/A"};
+			txtHandler.setText(profileText, fillerText);
+			
+			buttonHandler.setButton(true,b_back);
+		}
 	}
 	
 	private void showLogins(Rectangle[] optionsSet, Button[] buttonSet) {

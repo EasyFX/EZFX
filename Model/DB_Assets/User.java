@@ -48,15 +48,7 @@ public class User {
 	private void setPref_path(String pref_path) {
 		this.pref_path = pref_path;
 	}
-
-	public static String getPassword() {
-		return LazyHolder.INSTANCE.password;
-	}
-
-	private void setPassword(String password) {
-		this.password = password;
-	}
-
+	
 	public static String getEmail() {
 		return LazyHolder.INSTANCE.email;
 	}
@@ -87,6 +79,14 @@ public class User {
 	
 	private static void setremindMe(boolean value) {
 		User.remindMe = value;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	private void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

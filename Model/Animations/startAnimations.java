@@ -68,10 +68,10 @@ public class startAnimations {
 				factory.buildFade(set[1], 600, 0, 1.0, 0.0, 0.1, 1, false),
 				factory.buildFade(set[2], 600, 0, 1.0, 0.0, 0.1, 1, false)
 			),
-			factory.buildRotate(set[0], 300, 500, 30, null, 1, false),
+			factory.buildRotate(set[0], 300, 0, 30, null, 1, false),
 			AnimationFactory.buildParallel(
 				factory.buildFade(set[3], 200, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildRotate(set[3], 200, 500, -30, null, 1, false)
+				factory.buildRotate(set[3], 200, 0, -30, null, 1, false)
 			)
 		);
 	}
@@ -120,15 +120,15 @@ public class startAnimations {
 			AnimationFactory.buildPause(delay),
 			AnimationFactory.buildParallel(	
 				factory.buildFade(setR[0], 400, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildRotate(setR[0], 355, 500, 60, null, 1, false)
+				factory.buildRotate(setR[0], 355, 0, 60, null, 1, false)
 			),
 			AnimationFactory.buildParallel(	
 				factory.buildFade(setR[1], 400, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildRotate(setR[1], 355, 500, 60, null, 1, false)
+				factory.buildRotate(setR[1], 355, 0, 60, null, 1, false)
 			),
 			AnimationFactory.buildParallel(	
 				factory.buildFade(setR[2], 400, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildRotate(setR[2], 355, 500, 60, null, 1, false)
+				factory.buildRotate(setR[2], 355, 0, 60, null, 1, false)
 			),
 			factory.buildFade(setB[0], 400, 0, 0.0, 1.0, 0.1, 1, false),
 			factory.buildFade(setB[1], 300, 0, 0.0, 1.0, 0.1, 1, false),
@@ -144,16 +144,16 @@ public class startAnimations {
 				factory.buildFade(setB[2], 200, 0, 1.0, 0.0, 0.1, 1, false)
 			),
 			AnimationFactory.buildParallel(	
-					factory.buildRotate(setR[0], 400, 500, -60, null, 1, false),
-					factory.buildFade(setR[0], 700, 0, 1.0, 0.0, 0.1, 1, false)
+					factory.buildRotate(setR[0], 350, 0, -60, null, 1, false),
+					factory.buildFade(setR[0], 500, 0, 1.0, 0.0, 0.1, 1, false)
 			),
 			AnimationFactory.buildParallel(	
-					factory.buildRotate(setR[1], 400, 500, -60, null, 1, false),
-					factory.buildFade(setR[1], 700, 0, 1.0, 0.0, 0.1, 1, false)
+					factory.buildRotate(setR[1], 350, 0, -60, null, 1, false),
+					factory.buildFade(setR[1], 500, 0, 1.0, 0.0, 0.1, 1, false)
 			),
 			AnimationFactory.buildParallel(	
-					factory.buildRotate(setR[2], 400, 500, -60, null, 1, false),
-					factory.buildFade(setR[2], 700, 0, 1.0, 0.0, 0.1, 1, false)
+					factory.buildRotate(setR[2], 350, 0, -60, null, 1, false),
+					factory.buildFade(setR[2], 500, 0, 1.0, 0.0, 0.1, 1, false)
 			)
 		);
 	}

@@ -4,7 +4,7 @@
 package DB_Assets;
 
 public class passwordManager {
-	
+		
 	//Vigenery cipher + Caesar cipher
 	
 	private static passwordManager PM;
@@ -23,32 +23,44 @@ public class passwordManager {
 		return decryptVigenery(decryptCaesar(text,shift), key);
 	}
 	
-	
-    private String encryptVigenery(String text, final String key) {
+    private String encryptVigenery(String text, String key) {
         String res = "";
         text = text.toUpperCase();
         for (int i = 0, j = 0; i < text.length(); i++) {
             char c = text.charAt(i);
-            if (c < 'A' || c > 'Z') continue;
-            res += (char)((c + key.charAt(j) - 2 * 'A') % 26 + 'A');
-            j = ++j % key.length();
+            if (c < 'A' || c > 'Z') {
+            	res += c;
+            }
+            else {
+	            res += (char)((c + key.charAt(j) - 2 * 'A') % 26 + 'A');
+	            j = ++j % key.length();
+            }
         }
         return res;
     }
     
-    private String decryptVigenery(String text, final String key) {
+    private String decryptVigenery(String text, String key) {
+    	
+    	key = key.toUpperCase();
+    	
     	String res = "";
     	text = text.toUpperCase();
     	for (int i = 0, j = 0; i < text.length(); i++) {
     		char c = text.charAt(i);
-    		if (c < 'A' || c > 'Z') continue;
-    		res += (char)((c - key.charAt(j) + 26) % 26 + 'A');
-    		j = ++j % key.length();
-		}
-	return res;
+    		if (c < 'A' || c > 'Z') {
+            	res += c;
+            }
+            else {
+            	res += (char)((c - key.charAt(j) + 26) % 26 + 'A');
+            	j = ++j % key.length();
+            }
+    	}
+	return res.toLowerCase();
 	}
 
 	public static String encryptCaesar(String text, int shift) {
+		
+		text = text.toLowerCase();
 		
 		char[] buffer = text.toCharArray();
 	
@@ -57,11 +69,11 @@ public class passwordManager {
 			char letter = buffer[i];
 			if(letter != ' ') {
 				letter = (char) (letter + shift);
-				if (letter > 'z') {
-					letter = (char) (letter - 26);
-				} else if (letter < 'a') {
-					letter = (char) (letter + 26);
-				}
+				//if (letter > 'z') {
+				//	letter = (char) (letter - 26);
+				//} else if (letter < 'a') {
+				//	letter = (char) (letter + 26);
+				//}
 			}
 			buffer[i] = letter;
 	    }

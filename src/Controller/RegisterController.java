@@ -68,7 +68,6 @@ public class RegisterController extends sideController implements Initializable{
 	
 	@FXML
 	private void register(ActionEvent event) {
-		DBC.setupConnection();
 		
 		String user = input_username.getText();
 		String pass1 = input_password.getText();
@@ -94,7 +93,7 @@ public class RegisterController extends sideController implements Initializable{
 			text_error.setOpacity(0);
 			
 			User.getInstance(user, email, input_path.getText(), pass1, news.isSelected(), !news.isSelected());
-			DBC.addUser(user, email, input_path.getText(), getPM().encrypt(pass1, user, user.length()), news.isSelected(), !news.isSelected());
+			DBC.addUser(DBC.setupConnection(),user, email, input_path.getText(), getPM().encrypt(pass1, user, user.length()), news.isSelected(), !news.isSelected());
 
 			Parent root = null;
 			try {
@@ -126,7 +125,7 @@ public class RegisterController extends sideController implements Initializable{
 		//packing up set
 		Node[] set = {text_username,text_password,text_password1,text_password2,
 				text_email,text_path,input_username,input_password,input_password1,input_email,input_path,
-				news,b_register,b_back,b_browse};
+				news,b_register,b_back,b_browse, passStrength, passStrengthBar};
 		
 		//loading scene
 		sideAnimations.getRegisterSequence(set,2000).play();

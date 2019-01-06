@@ -47,10 +47,14 @@ public class sideAnimations {
 
 			),
 			AnimationFactory.buildParallel(
-				factory.buildFade(set[11], 200, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildFade(set[12], 200, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildFade(set[13], 200, 0, 0.0, 1.0, 0.1, 1, false),
-				factory.buildFade(set[14], 200, 0, 0.0, 1.0, 0.1, 1, false)
+					factory.buildFade(set[11], 200, 0, 0.0, 1.0, 0.1, 1, false),
+					factory.buildFade(set[12], 200, 0, 0.0, 1.0, 0.1, 1, false),
+					factory.buildFade(set[13], 200, 0, 0.0, 1.0, 0.1, 1, false),
+					factory.buildFade(set[14], 200, 0, 0.0, 1.0, 0.1, 1, false)
+			),
+			AnimationFactory.buildParallel(
+					factory.buildFade(set[15], 200, 0, 0.0, 1.0, 0.1, 1, false),
+					factory.buildFade(set[16], 200, 0, 0.0, 1.0, 0.1, 1, false)
 			)
 		);
 	}
