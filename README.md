@@ -1,4 +1,4 @@
-# EZFX v1.3.5
+# EZFX v1.3.6
 
 
 ![Logo](https://i.imgur.com/Yk6R2Hv.png)
