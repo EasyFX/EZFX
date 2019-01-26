@@ -1,4 +1,4 @@
-# EZFX v1.3.6
+# EZFX v1.4
 
 
 ![Logo](https://i.imgur.com/Yk6R2Hv.png)
@@ -24,6 +24,7 @@
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.4: Fixed minor DB bugs
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.5: Adjusted dead links with some buttons
    ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.6: Extended database
-   
+   ###### &nbsp;&nbsp;&nbsp;&nbsp; v1.3.7: Expanded documentation (meeting addendums)
+##### v1.4.x - Front & back end connection
    
 
