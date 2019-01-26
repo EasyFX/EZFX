@@ -49,6 +49,7 @@ public class LoginController extends sideController implements Initializable {
 		
 		if(user.isEmpty() || pass.isEmpty()) {
 			text_error.setText("Fields can not be empty");
+			text_error.setOpacity(1);
 		}
 		
 		else {
@@ -64,7 +65,11 @@ public class LoginController extends sideController implements Initializable {
 				}
 				Driver.switchScene(root);
 				Driver.controller.reConstruct(1);
-			}			
+			}	
+			else {
+				text_error.setText("Username or Password incorrrect");
+				text_error.setOpacity(1);
+			}
 		}	
 	}
 	
@@ -72,7 +77,7 @@ public class LoginController extends sideController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		Node[] set = {text_username,text_password,input_username,input_password, b_login, b_back};
-		sideAnimations.getLoginSequence(set,5000).play();
+		sideAnimations.getLoginSequence(set,3000).play();
 		
 	}
 }
