@@ -111,4 +111,25 @@ public class DBController {
 		}
 	}
 	
+	public void setLocalUser(Connection connection, String name) {
+		
+		ResultSet rSet;
+		
+		try {
+			Statement statement = connection.createStatement();
+			
+			rSet = statement.executeQuery("SELECT name, email, prefPath, newsLetter, remindMe, pass FROM user WHERE name = " + name);
+			rSet.next();
+			
+			User.getInstance(rSet.getString("name"), rSet.getString("email"), rSet.getString("prefPath"), rSet.getString("pass"), rSet.getBoolean("newsLetter"), rSet.getBoolean("remindMe"));
+		
+			
+		} catch (SQLException e) {
+			System.out.println("Error 2B: DB disconnected[1]");
+			e.printStackTrace();
+			return;
+		}
+		
+	}
+	
 }

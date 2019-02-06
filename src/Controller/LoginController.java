@@ -56,6 +56,8 @@ public class LoginController extends sideController implements Initializable {
 			
 			if(DBC.checkLogin(DBC.select(DBC.setupConnection(), "*", "user", null), user, pass)) {
 				
+				
+				
 				Parent root = null;
 				try {
 					root = getLink().getRoot("./Start.fxml");
@@ -77,7 +79,7 @@ public class LoginController extends sideController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		Node[] set = {text_username,text_password,input_username,input_password, b_login, b_back};
-		sideAnimations.getLoginSequence(set,3000).play();
+		sideAnimations.getLoginSequence(set,1800).play();
 		
 	}
 }
