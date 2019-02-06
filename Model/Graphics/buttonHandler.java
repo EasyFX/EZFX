@@ -28,19 +28,19 @@ public class buttonHandler {
 		}
 	}
 	
-	public static void setButton(boolean fade, Button ... set) {
+	public static void setButton(boolean fade, int delay, Button ... set) {
 		for(Button b : set) {
 			b.setCursor(Cursor.OPEN_HAND);
 			b.setDisable(false);
-			if(fade) factory.buildFade(b, 1000, 0, 0.0, 1.0, 0.1, 1, false).play();
+			if(fade) factory.buildFade(b, 1000, delay, 0.0, 1.0, 0.1, 1, false).play();
 		}
 	}
 	
-	public static void unsetButton(boolean fade, Button ... set) {
+	public static void unsetButton(boolean fade, int delay, Button ... set) {
 		for(Button b : set) {
 			b.setCursor(Cursor.DEFAULT);
 			b.setDisable(true);
-			if(fade) factory.buildFade(b, 1000, 0, 1.0, 0.0, 0.1, 1, false).play();
+			if(fade) factory.buildFade(b, 1000, delay, 1.0, 0.0, 0.1, 1, false).play();
 		}
 	}
 }

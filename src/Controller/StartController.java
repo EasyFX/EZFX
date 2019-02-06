@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Animations.startAnimations;
+import DB_Assets.User;
 import Animations.shapeManipulation;
 
 import Essentials.rootLink;
@@ -99,7 +100,7 @@ public class StartController implements Initializable{
 		icon_settings.setImage(imgHandler.getImage("Views/icons/icon_settings.png"));
 		
 		//Buttons:
-		buttonHandler.unsetButton(false, buttonSet);
+		buttonHandler.unsetButton(false, 0, buttonSet);
 		
 		//Pivoting:
 		shapeManipulation.movePivot(optionBar1,100,100);
@@ -109,7 +110,7 @@ public class StartController implements Initializable{
 		//Loading sequence from Model:
 		startAnimations.getLoginSequenceA(glowBarSet, imgSet).play();
 		startAnimations.getLoginSequenceB(optionsSet,buttonSet,5500).play();
-		buttonHandler.setButton(false,b_guest,b_login,b_reg);
+		buttonHandler.setButton(false, 1000, b_guest,b_login,b_reg);
 	}
 	
 	@FXML //click button Guest
@@ -125,8 +126,8 @@ public class StartController implements Initializable{
 		showProfile(profileSet,profileText);
 		txtHandler.setText(profileText, fillerText);
 		
-		buttonHandler.unsetButton(true, buttonSet);
-		buttonHandler.setButton(true,b_back);
+		buttonHandler.unsetButton(true, 0, buttonSet);
+		buttonHandler.setButton(true, 1000, b_back);
 	}
 	
 	@FXML //click button "back" after a succesful guest or non guest login
@@ -140,9 +141,8 @@ public class StartController implements Initializable{
 		hideProfile(profileSet,profileText);
 		showLogins(optionsSet,buttonSet);
 		
-		buttonHandler.setButton(false, buttonSet);
-		buttonHandler.unsetButton(true,b_back);
-		
+		buttonHandler.setButton(false, 1200, buttonSet);
+		buttonHandler.unsetButton(true, 0, b_back);
 	}
 	
 	@FXML
@@ -225,10 +225,11 @@ public class StartController implements Initializable{
 		else {			
 			showProfile(profileSet,profileText);
 			
-			String[] fillerText = {"Name: Guest","Email: N/A"};
+			String[] fillerText = {"Name: " + User.getName(), "Email: " + User.getEmail()};
 			txtHandler.setText(profileText, fillerText);
 			
-			buttonHandler.setButton(true,b_back);
+			buttonHandler.unsetButton(true, 0, buttonSet);
+			buttonHandler.setButton(true, 2000, b_back);
 		}
 	}
 	

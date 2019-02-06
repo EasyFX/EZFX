@@ -17,7 +17,7 @@ public class startAnimations {
 	//A: Glow effect + E-Z-F-X flash + twist main
 	//UndoA: Revert A to a single black pane
 	
-	//B: Load in login option + bottom bar
+	//B: Load in login options + bottom bar
 	//UndoB: Load out login options
 	
 	//Profile: Comes after A, loads in profile information in place of login options + templates on side + setting button
