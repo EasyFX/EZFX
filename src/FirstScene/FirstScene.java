@@ -18,24 +18,25 @@ public class FirstScene extends Scene {
 	public static Canvas canvas;
 	public static HierarchyTree hierarchyTree;
 	public static Group TheFirstOne = new Group();
-	
-	private Scene scene;
+
+	private static Scene scene;
+
 	public FirstScene() {
 		super(TheFirstOne, App.Window.getWidth(), App.Window.getHeight());
 		setFill(Constants.FIRST_SCENE_BACKGROUND_COLOR);
-		treeWriter = new TreeWriter(UserData.PATH);
-		treeReader = new TreeReader(UserData.PATH);
+		treeWriter = new TreeWriter(UserData.EZ_TREE_PATH + "/" + UserData.EZ_TREE_FILENAME);
+		treeReader = new TreeReader(UserData.EZ_TREE_PATH + "/" + UserData.EZ_TREE_FILENAME);
 		topBar = new TopBar(Constants.TOP_BAR_BUTTON_COUNT);
 		entityExplorer = new EntityExplorer();
 		hierarchyTree = new HierarchyTree();
 		attributesPanel = new AttributesPanel();
 		canvas = new Canvas();
-		TheFirstOne.getChildren().addAll(topBar, entityExplorer, hierarchyTree, attributesPanel, canvas);
-		
+		TheFirstOne.getChildren().addAll(canvas, topBar, entityExplorer, hierarchyTree, attributesPanel);
+
 		scene = this;
 	}
-	
-	public Scene getScene() {
+
+	public static Scene getScene() {
 		return scene;
 	}
 }

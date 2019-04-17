@@ -6,6 +6,8 @@ import App.App;
 import FirstScene.FirstScene;
 import FirstScene.TopBar;
 import Utils.Constants;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -18,16 +20,17 @@ import javafx.scene.paint.Color;
 @SuppressWarnings("deprecation")
 public class BluePrintScene extends Scene {
 
-	public static Node BlueNode;
+	public static Node BlueNode, NodeToBlue;
 	public static Group TheSecondOne = new Group();
 	public static TopBar topBar;
 	public static NodeExplorer nodeExplorer;
 	public static BlueprintExplorer blueprintExplorer;
 	public static Group blueprintRoot;
+	public static EventType<Event> eventType;
 
 	private static boolean setTextInvoked = false;
 
-	public BluePrintScene() {
+	public BluePrintScene(EventType<Event> eventType) {
 		super(TheSecondOne, App.Window.getWidth(), App.Window.getHeight());
 		setupNode();
 		if (BlueNode == null)
@@ -35,14 +38,17 @@ public class BluePrintScene extends Scene {
 		topBar = new TopBar(Constants.TOP_BAR_BUTTON_COUNT);
 		nodeExplorer = new NodeExplorer();
 		blueprintExplorer = new BlueprintExplorer();
+		BluePrintScene.eventType = eventType;
 		blueprintRoot = new Group();
 		
-		TheSecondOne.getChildren().addAll(topBar, nodeExplorer, blueprintExplorer, BlueNode, blueprintRoot);	
+		TheSecondOne.getChildren().addAll(topBar, nodeExplorer, blueprintExplorer, blueprintRoot);
 	}
 
 	private void setupNode() {
 		if (FirstScene.entityExplorer.Chosen == null)
 			return;
+
+		NodeToBlue = FirstScene.entityExplorer.Chosen;
 
 		try {
 			Node node = (Node) FirstScene.entityExplorer.Chosen.getClass().newInstance();
@@ -61,15 +67,12 @@ public class BluePrintScene extends Scene {
 			if (!setTextInvoked) {
 				for (Method method : node.getClass().getMethods()) {
 					if (method.getName().equals("setBackground")) {
-						System.out.println("Hello1");
 						method.invoke(node, new Background(new BackgroundFill(Color.RED, null, null)));
 					}
 					if (method.getName().equals("setPrefWidth")) {
-						System.out.println("Hello2");
 						method.invoke(node, 50);
 					}
 					if (method.getName().equals("setPrefHeight")) {
-						System.out.println("Hello3");
 						method.invoke(node, 50);
 					}
 				}
@@ -86,4 +89,9 @@ public class BluePrintScene extends Scene {
 		}
 
 	}
+
+	public static Node getNodeToBlue() {
+		return NodeToBlue;
+	}
+
 }

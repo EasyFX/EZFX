@@ -1,0 +1,124 @@
+Add
+~
+??n??.addEventFilter(??ef??,event -> {
+	try{
+	Object[] objects = null;
+	??o??.getClass().getMethod("setText", new String().getClass())
+					.invoke(??o??,
+							"" + (Integer.parseInt((String) ??i0??.getClass()
+											.getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i0??, objects))
+									+ Integer.parseInt((String) ??i1??
+											.getClass().getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i1??, objects))));
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+});
+~
+
+twice
+~
+??n??.addEventFilter(??ef??,event -> {
+	try{
+	Object[] objects = null;
+	??o??.getClass().getMethod("setText", new String().getClass())
+					.invoke(??o??,
+							"" + (Integer.parseInt((String) ??i0??.getClass()
+											.getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i0??, objects))
+									* 2;
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+});
+~
+
+Subtract
+~
+??n??.addEventFilter(??ef??,event -> {
+	try{
+	Object[] objects = null;
+	??o??.getClass().getMethod("setText", new String().getClass())
+					.invoke(??o??,
+							"" + (Integer.parseInt((String) ??i0??.getClass()
+											.getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i0??, objects))
+									- Integer.parseInt((String) ??i1??
+											.getClass().getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i1??, objects))));
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+});
+~
+
+Multiply
+~
+??n??.addEventFilter(??ef??,event -> {
+	try{
+	Object[] objects = null;
+	??o??.getClass().getMethod("setText", new String().getClass())
+					.invoke(??o??,
+							"" + (Integer.parseInt((String) ??i0??.getClass()
+											.getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i0??, objects))
+									* Integer.parseInt((String) ??i1??
+											.getClass().getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i1??, objects))));
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+});
+~
+
+Divide
+~
+??n??.addEventFilter(??ef??,event -> {
+	try{
+	Object[] objects = null;
+	??o??.getClass().getMethod("setText", new String().getClass())
+					.invoke(??o??,
+							"" + (Integer.parseInt((String) ??i0??.getClass()
+											.getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i0??, objects))
+									/ Integer.parseInt((String) ??i1??
+											.getClass().getMethod("getText", (Class<?>[]) objects)
+											.invoke(??i1??, objects))));
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+});
+~
+
+Size Up
+~
+??n??.addEventFilter(??ef??,event -> {
+	try {
+				Object[] objects = null;
+				??o??.getClass().getMethod("setRadius", double.class).invoke(??o??,
+						(double) ??o??.getClass().getMethod("getRadius", (Class<?>[]) objects).invoke(??o??, objects)
+								+ 10);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+});
+~
+
+Size Down
+~
+??n??.addEventFilter(??ef??,event -> {
+	try {
+				Object[] objects = null;
+				??o??.getClass().getMethod("setRadius", double.class).invoke(??o??,
+						(double) ??o??.getClass().getMethod("getRadius", (Class<?>[]) objects).invoke(??o??, objects)
+								- 10);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+});
+~

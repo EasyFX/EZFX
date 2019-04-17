@@ -19,6 +19,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -113,7 +114,7 @@ public class EntityExplorer extends VBox {
 			FirstScene.hierarchyTree.AddItem(string, image, newNode);
 
 			final Node self = newNode;
-			newNode.setOnMousePressed(event2 -> {
+			newNode.addEventFilter(MouseEvent.MOUSE_PRESSED, event2 -> {
 				Method[] field = self.getClass().getMethods();
 				List<String> strings = new ArrayList<>();
 				for (Method field2 : field) {
@@ -125,24 +126,30 @@ public class EntityExplorer extends VBox {
 				FirstScene.attributesPanel.setAttributes(self, strings2);
 				Chosen = self;
 			});
-			newNode.setOnKeyPressed(KeyEvent -> {
+			newNode.addEventFilter(KeyEvent.KEY_PRESSED, KeyEvent -> {
 				if (KeyEvent.getCode() == KeyCode.DELETE) {
-					FirstScene.canvas.deleteItem(self);
-					FirstScene.hierarchyTree.DeleteItem(self);
-					FirstScene.attributesPanel.setAttributes(null, new String[0]);
+					if (self.equals(Chosen)) {
+						BluePrintScene.nodeExplorer.removeNode(self.getId());
+						FirstScene.canvas.deleteItem(self);
+						FirstScene.hierarchyTree.DeleteItem(self);
+						FirstScene.attributesPanel.setAttributes(null, new String[0]);
+					}
 				}
 			});
 			try {
-				if(BluePrintScene.nodeExplorer == null) {
-					Chosen = newNode ;
-					SceneManager.getSceneManager().refreshBlueprint();
+				if (BluePrintScene.nodeExplorer == null) {
+					Chosen = newNode;
+					SceneManager.getSceneManager().refreshBlueprint(null);
 				}
 				Node BlueprintNode = node.getClass().newInstance();
 				BlueprintNode.setId(newNode.getId() + "BID");
-				BluePrintScene.nodeExplorer.addNode(string,image,BlueprintNode);
+				BluePrintScene.nodeExplorer.addNode(string, image, BlueprintNode);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			System.out.println(FirstScene.canvas.Items.getChildren().size());
+			System.out.println(FirstScene.canvas.Items.getChildren());
+			System.out.println(((VBox)FirstScene.canvas.Items.getChildren().get(0)).getChildren());
 		};
 		Line.addEventFilter(MouseEvent.MOUSE_RELEASED, MouseReleased);
 		Line.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {

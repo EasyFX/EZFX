@@ -65,24 +65,29 @@ public class NodeExplorer extends VBox {
 
 	public void addNode(String string, Image image, Node node) {
 		Region region = new Region();
-		HBox hBox = new HBox(new ImageView(image), new Label(string + " " + node.getId().replace("BID", "")),region,new Circle(5));
+		Circle circle = new Circle(5);
+		HBox hBox = new HBox(new ImageView(image), new Label(string + " " + node.getId().replace("BID", "")), region,
+				circle);
 		HBox.setHgrow(region, Priority.ALWAYS);
 		hBox.setAlignment(Pos.CENTER_LEFT);
-		
+		circle.setId(node.getId() + "C");
+
 		NodeList.add(hBox);
 	}
 
-	public void removeNode(Node node) {
+	public void removeNode(String ID) {
 		HBox hBoxToRemove = null;
+		boolean search = true;
 		for (HBox hBox : NodeList) {
-			for (Node node2 : hBox.getChildren())
-				if (node2.equals(node)) {
-					hBoxToRemove = hBox;
-					break;
-				}
-			if (hBoxToRemove != null)
+			if (search) {
+				search = false;
+				continue;
+			}
+			String string = ((Label) hBox.getChildren().get(1)).getText().split(" ")[1];
+			if (string.equals(ID)) {
+				hBoxToRemove = hBox;
 				break;
-
+			}
 		}
 		NodeList.remove(hBoxToRemove);
 	}

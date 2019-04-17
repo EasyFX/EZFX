@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class MainWindowEventHandler {
 
@@ -18,9 +19,9 @@ public class MainWindowEventHandler {
 		}
 	};
 
+	private EventHandler<MouseEvent> MouseHandler = mouseEvent -> {
+	};
 
-	
-	
 	public void setUpEventHandlers(Scene oldScene, Scene newScene) {
 		if (oldScene != null)
 			RemoveEventHandlers(oldScene);
@@ -34,6 +35,7 @@ public class MainWindowEventHandler {
 
 	private void AddEventHandlers(Scene scene) {
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, KeyHandler);
+		scene.addEventFilter(MouseEvent.MOUSE_PRESSED, MouseHandler);
 	}
 
 }

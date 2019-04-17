@@ -1,5 +1,6 @@
 package BluePrints;
 
+import BlueprintScene.BluePrintScene;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ public class BlueprintBuilder {
 	private int InputCount, OutputCount;
 	private Color BackgroundColor;
 
+
 	public BlueprintBuilder(String eventName, Image eventImage, EventHandler<Event> event, int inputCount,
 			int outputCount, Color backgrouncolor) {
 		Event = event;
@@ -27,7 +29,7 @@ public class BlueprintBuilder {
 	}
 
 	public Blueprint build() {
-		return new Blueprint(EventName, EventImage, Event, InputCount, OutputCount, BackgroundColor);
+		return new Blueprint(EventName, EventImage, Event, InputCount, OutputCount, BackgroundColor,BluePrintScene.eventType,BluePrintScene.NodeToBlue);
 	}
 	
 	public HBox toEntry() {

@@ -1,13 +1,19 @@
 package BluePrints;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import BlueprintScene.BluePrintScene;
+import FirstScene.FirstScene;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.PickResult;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -20,7 +26,12 @@ import javafx.scene.text.Font;
 
 public class Blueprint {
 
-	private boolean isDraging = false;
+	public static Map<Blueprint, Node> blueprints = new HashMap<>();
+	public static Map<Node, Blueprint> nodes = new HashMap<>();
+	public static Map<Blueprint, Boolean> isAlreadyDone = new HashMap<>();
+
+	public static Blueprint currentBluePrint;
+
 	private double X1, Y1, X2, Y2;
 	private static int ID = 0;
 
@@ -32,12 +43,14 @@ public class Blueprint {
 	private Color BackgroundColor;
 	private StackPane stackPane;
 	private Rectangle rectangle = new Rectangle();
-	private Object[] InputObjects, OutputObjects;
+	private Node[] InputObjects, OutputObjects;
 	private boolean Changed = false;
+	private EventType<Event> EventType;
 	private Group group;
+	private Node NodeToBlue;
 
 	public Blueprint(String eventName, Image eventImage, EventHandler<Event> event, int inputCount, int outputCount,
-			Color backgrouncolor) {
+			Color backgrouncolor, EventType<Event> eventType, Node nodeToBlue) {
 		ID++;
 		BlueprintID = ID;
 		Event = event;
@@ -46,8 +59,10 @@ public class Blueprint {
 		InputCount = inputCount;
 		OutputCount = outputCount;
 		BackgroundColor = backgrouncolor;
-		InputObjects = new Object[InputCount];
-		OutputObjects = new Object[OutputCount];
+		EventType = eventType;
+		NodeToBlue = nodeToBlue;
+		setInputObjects(new Node[InputCount]);
+		setOutputObjects(new Node[OutputCount]);
 
 		rectangle.setFill(BackgroundColor);
 
@@ -77,6 +92,7 @@ public class Blueprint {
 			circle.setFill(Color.BLACK);
 			circle.setStroke(Color.BLACK);
 		}
+
 		Output.setSpacing(5);
 		Output.setAlignment(Pos.CENTER);
 
@@ -107,7 +123,12 @@ public class Blueprint {
 		});
 
 		stackPane.getChildren().addAll(rectangle, hBox);
-
+		if (!blueprints.containsKey(this)) {
+			nodes.put(nodeToBlue, this);
+			blueprints.put(this, BluePrintScene.NodeToBlue);
+			isAlreadyDone.put(this, false);
+		}
+		currentBluePrint = this;
 	}
 
 	public EventHandler<Event> getEvent() {
@@ -180,15 +201,16 @@ public class Blueprint {
 		circle.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
 			X1 = event.getSceneX();
 			Y1 = event.getSceneY();
-			isDraging = true;
 		});
 		circle.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
-			if(!(event.getPickResult().getIntersectedNode() instanceof Circle))
+			if (!(event.getPickResult().getIntersectedNode() instanceof Circle)
+					|| !event.getPickResult().getIntersectedNode().getId().endsWith("BIDC"))
 				return;
-			
+
+			Node intersectedNode = event.getPickResult().getIntersectedNode();
+
 			X2 = event.getSceneX();
 			Y2 = event.getSceneY();
-			isDraging = false;
 			Line line = new Line(X1, Y1, X2, Y2);
 			group.getChildren().add(line);
 			line.setTranslateX(line.getTranslateX() - group.getTranslateX());
@@ -197,16 +219,59 @@ public class Blueprint {
 			line.setSmooth(true);
 			line.setStrokeWidth(5);
 			line.setStrokeLineCap(StrokeLineCap.ROUND);
-			
+
 			line.toBack();
-			
+
 			if (string.equals("Input")) {
 				line.getStrokeDashArray().addAll(15.0);
 				line.setStroke(Color.DARKORANGE);
+				getInputObjects()[i] = FirstScene.getScene()
+						.lookup("#" + (Integer.parseInt(intersectedNode.getId().replace("BIDC", ""))));
+			}
+			if (string.equals("Output")) {
+				getOutputObjects()[i] = FirstScene.getScene()
+						.lookup("#" + (Integer.parseInt(intersectedNode.getId().replace("BIDC", ""))));
 			}
 
 		});
 
 		return circle;
 	}
+
+	private void connectBlueprint() {
+		if (!isAlreadyDone.get(this)) {
+			//blueprints.get(this).addEventFilter(EventType, Event);
+			isAlreadyDone.put(this, true);
+		}
+	}
+
+	public static void connectBlueprints() {
+		for (Node node: nodes.keySet())
+			nodes.get(node).connectBlueprint();
+	}
+
+	public Node[] getInputObjects() {
+		return InputObjects;
+	}
+
+	public void setInputObjects(Node[] inputObjects) {
+		InputObjects = inputObjects;
+	}
+
+	public Node[] getOutputObjects() {
+		return OutputObjects;
+	}
+
+	public void setOutputObjects(Node[] outputObjects) {
+		OutputObjects = outputObjects;
+	}
+
+	public Node getNodeToBlue() {
+		return NodeToBlue;
+	}
+
+	public EventType<Event> getEventType() {
+		return EventType;
+	}
+
 }

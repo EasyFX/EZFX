@@ -32,11 +32,12 @@ public class App extends Application {
 	}
 
 	private void setup() {
+		Window.setTitle(Constants.SOFTWARE_TITLE);
 		setupWindow();
 		mainWindowEventHandler = new MainWindowEventHandler();
 		setupLayout();
-		ItemLoader.LoadSections("./Sections.in");
-		ItemLoader.LoadItems("./Items.in");
+		ItemLoader.LoadSections(Constants.SECTIONS_INPUT_PATH);
+		ItemLoader.LoadItems(Constants.ITEMS_INPUT_PATH);
 	}
 
 	private void setupWindow() {
@@ -54,7 +55,7 @@ public class App extends Application {
 	private void setupLayout() {
 		sceneManager.addScene(new FirstScene());
 		sceneManager.changeScene(1);
-		sceneManager.addScene(new BluePrintScene());
+		sceneManager.addScene(new BluePrintScene(null));
 	}
 
 	public static void main(String[] args) {

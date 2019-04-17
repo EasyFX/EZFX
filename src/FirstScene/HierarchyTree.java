@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import BlueprintScene.BluePrintScene;
 import Loaders.ItemLoader;
 import Utils.Constants;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -29,13 +31,15 @@ public class HierarchyTree extends VBox {
 	public static ObservableList<TreeItem<HBox>> Items = FXCollections.observableArrayList();
 	public TreeView<HBox> Hierarchy = new TreeView<>();
 
-	public Parent mainBox;
+	public Node mainBox;
 
 	private TreeItem<HBox> Root = new TreeItem<>(), basePane;
 	public TreeItem<HBox> selected;
 
 	private Map<String, Integer> count = new HashMap<>();
 	private Map<Node, TreeItem<HBox>> map = new HashMap<>();
+
+	private static boolean first = true;
 
 	public HierarchyTree() {
 		setupTree();
@@ -89,17 +93,23 @@ public class HierarchyTree extends VBox {
 		selected.getChildren().add(treeItem);
 		map.put(node, treeItem);
 
-		box.setOnMousePressed(event -> {
-			if (event.getButton() == MouseButton.SECONDARY) {
-				FirstScene.canvas.deleteItem(node);
-				FirstScene.hierarchyTree.DeleteItem(node);
-				FirstScene.attributesPanel.setAttributes(null, new String[0]);
-			}
+		if (!first)
+			box.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+				if (event.getButton() == MouseButton.SECONDARY) {
+					BluePrintScene.nodeExplorer.removeNode(node.getId());
+					FirstScene.canvas.deleteItem(node);
+					FirstScene.hierarchyTree.DeleteItem(node);
+					FirstScene.attributesPanel.setAttributes(null, new String[0]);
+				}
+			});
+		box.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (node instanceof Pane)
 					mainBox = (Pane) node;
-				else
+				else if (node instanceof Parent)
 					mainBox = (Parent) node;
+				else
+					mainBox = node;
 				Method[] field = node.getClass().getMethods();
 				List<String> strings = new ArrayList<>();
 				for (Method field2 : field) {
@@ -112,16 +122,17 @@ public class HierarchyTree extends VBox {
 			}
 
 		});
-		
+		first = false;
 		treeItem.setExpanded(true);
 		return treeItem;
+
 	}
 
 	public void DeleteItem(Node node) {
 
 		map.get(node).getParent().getChildren().remove(map.get(node));
 		map.remove(node);
-		
+
 	}
 
 	public void setMainBox(Pane node) {
@@ -132,18 +143,14 @@ public class HierarchyTree extends VBox {
 	}
 
 	public void loadHierarchyTree(Node root) {
-		loadHierarchyTree(root,mainBox);
+		loadHierarchyTree(root, mainBox);
 	}
 
-	public void loadHierarchyTree(Node root,Parent MainBox) {
+	public void loadHierarchyTree(Node root, Node mainBox2) {
 		AddItem(ItemLoader.LookUpName(root), ItemLoader.LookUpImage(root), root);
 		if (root instanceof Parent && !(root instanceof Control)) {
-			
-	
-			
+
 		}
 	}
-	
-	
-	
+
 }

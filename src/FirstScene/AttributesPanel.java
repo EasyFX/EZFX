@@ -9,7 +9,9 @@ import Scene.SceneManager;
 import Utils.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -26,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class AttributesPanel extends VBox {
+
 	public static ListView<HBox> Attributes = new ListView<>();
 	public HBox searchBox;
 	public static TextField searchField = new TextField();
@@ -66,7 +70,8 @@ public class AttributesPanel extends VBox {
 			Label label = new Label(attribute);
 			if (!attribute.startsWith("setOn")) {
 				TextField textfield = new TextField();
-				textfield.setOnKeyPressed(Event -> {
+
+				EventHandler<KeyEvent> eventHandler = Event -> {
 					if (Event.getCode() == KeyCode.ENTER) {
 						textfield.deselect();
 
@@ -90,16 +95,22 @@ public class AttributesPanel extends VBox {
 							e.printStackTrace();
 						}
 					}
-				});
+				};
+
+				textfield.addEventFilter(KeyEvent.KEY_PRESSED, eventHandler);
+
 				list.add(new HBox(label, textfield));
 			} else {
 				Button button = new Button("To Blueprint");
 				button.setFont(new Font(9));
 				button.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-					SceneManager.getSceneManager().changeScene(2);
+					if (event.getButton() == MouseButton.PRIMARY) {
+						SceneManager.getSceneManager().newBlueprint(getEventType(attribute));
+					}
 				});
 				button.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-					SceneManager.getSceneManager().changeScene(2);
+					if (event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.ENTER)
+						SceneManager.getSceneManager().newBlueprint(getEventType(attribute));
 				});
 				list.add(new HBox(label, button));
 			}
@@ -147,23 +158,55 @@ public class AttributesPanel extends VBox {
 	}
 
 	private Object getObject(String name, TextField textfield) {
-		if (name.equals("double")) {
-			return Double.parseDouble(textfield.getText());
-		} else if (name.equals("integer")) {
-			return Integer.parseInt(textfield.getText());
-		} else if (name.equals("float")) {
-			return Float.parseFloat(textfield.getText());
-		} else if (name.equals("String")) {
-			return textfield.getText().toString();
-		} else if (name.equals("EventHandler")) {
-			return new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-
-				}
-			};
+		try {
+			if (name.equals("double")) {
+				return Double.parseDouble(textfield.getText());
+			} else if (name.equals("integer")) {
+				return Integer.parseInt(textfield.getText());
+			} else if (name.equals("float")) {
+				return Float.parseFloat(textfield.getText());
+			} else if (name.equals("String")) {
+				return textfield.getText().toString();
+			}
+		} catch (Exception e) {
+			return null;
 		}
 		return null;
+	}
+
+	private EventType<? extends Event> getEventType(String type) {
+		String eventType = type.replace("setOn", "").toLowerCase();
+
+		switch (eventType) {
+		case "mousepressed":
+			return MouseEvent.MOUSE_PRESSED;
+		case "mousereleased":
+			return MouseEvent.MOUSE_RELEASED;
+		case "mouseclicked":
+			return MouseEvent.MOUSE_CLICKED;
+		case "mousedragged":
+			return MouseEvent.MOUSE_DRAGGED;
+		case "mouseentered":
+			return MouseEvent.MOUSE_ENTERED;
+		case "mouseexited":
+			return MouseEvent.MOUSE_EXITED;
+		case "mousemoved":
+			return MouseEvent.MOUSE_MOVED;
+		case "mouseenteredtarget":
+			return MouseEvent.MOUSE_ENTERED_TARGET;
+		case "mouseexitedtarget":
+			return MouseEvent.MOUSE_EXITED_TARGET;
+		case "dragdetected":
+			return MouseEvent.DRAG_DETECTED;
+		case "keypressed":
+			return KeyEvent.KEY_PRESSED;
+		case "keyreleased":
+			return KeyEvent.KEY_RELEASED;
+		case "keytyped":
+			return KeyEvent.KEY_TYPED;
+		default:
+			return Event.ANY;
+		}
 	}
 
 }

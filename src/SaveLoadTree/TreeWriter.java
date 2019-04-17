@@ -20,15 +20,10 @@ public class TreeWriter {
 
 	public void writeTree(Parent root) {
 		try {
-			double x = root.getTranslateX(), y = root.getTranslateY();
 
-			root.setTranslateX(0);
-			root.setTranslateY(0);
 			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(Path)));
-			writeTree(root, bufferedWriter, 0);
+			writeTree((Parent) root, bufferedWriter, 0);
 			bufferedWriter.close();
-			root.setTranslateX(x);
-			root.setTranslateY(y);
 
 		} catch (Exception e) {
 			e.printStackTrace();

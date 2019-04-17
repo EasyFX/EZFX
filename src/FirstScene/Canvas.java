@@ -4,6 +4,7 @@ import App.App;
 import Utils.Constants;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -21,25 +22,23 @@ public class Canvas extends Pane {
 		setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 
 		setTranslateX(Constants.WIDTH / 6 + xOffset);
-		setTranslateY(Constants.HEIGHT / 6 + yOffset);
+		setTranslateY(Constants.TOP_BAR_HEIGHT + yOffset);
 		Items.setTranslateX(-(Constants.WIDTH / 6 + xOffset));
-		Items.setTranslateY(-(Constants.HEIGHT / 6 + yOffset));
+		Items.setTranslateY(-(Constants.TOP_BAR_HEIGHT + yOffset));
 		
 		VBox vbox = new VBox();
 		vbox.setTranslateX(getTranslateX());
 		vbox.setTranslateY(getTranslateY());
-		vbox.setMaxHeight(getPrefHeight());
-		vbox.setMaxWidth(getPrefWidth());
-
+		vbox.setMaxHeight(Constants.HEIGHT);
+		vbox.setMaxWidth(Constants.WIDTH);
+	
 		App.Window.widthProperty().addListener(nmb ->{
 			setPrefWidth(App.Window.getWidth()- FirstScene.attributesPanel.getPrefWidth()
 					- FirstScene.entityExplorer.getPrefWidth() - 2 * xOffset);
-			vbox.setMaxWidth(getWidth() - (vbox.getTranslateX()- getTranslateX()));
 		});
 		
 		App.Window.heightProperty().addListener(nmb -> {
 			setPrefHeight(App.Window.getHeight() - FirstScene.topBar.getPrefHeight() - 2 * yOffset -39);
-			vbox.setMaxHeight(getHeight() - (vbox.getTranslateY()- getTranslateY()));
 		});
 		
 		
@@ -53,7 +52,10 @@ public class Canvas extends Pane {
 	}
 
 	public void deleteItem(Node node) {
-		Items.getChildren().remove(node);
+		if(node.getParent() instanceof Pane)
+			((Pane)node.getParent()).getChildren().remove(node);
+		else if(!(node.getParent() instanceof Control))
+			((Group)node.getParent()).getChildren().remove(node);
 	}
 	
 	public boolean isInside(double x,double y) {

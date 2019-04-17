@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -30,7 +31,8 @@ import javafx.scene.layout.Priority;
 @SuppressWarnings("deprecation")
 public class TreeReader {
 
-	String Path;
+	private String Path;
+	private boolean isFirst = true;
 
 	public TreeReader(String Path) {
 		this.Path = Path;
@@ -40,47 +42,74 @@ public class TreeReader {
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(Path)));
 			read(bufferedReader, root);
-			root.setTranslateX(0);
-			FirstScene.hierarchyTree.loadHierarchyTree(root);
 			bufferedReader.close();
+			((Group) root).getChildren().remove(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	private void read(BufferedReader bufferedReader, Parent root) {
 		try {
 			Stack<Parent> nodes = new Stack<>();
-			nodes.add(root);
+			Stack<TreeItem<HBox>> treeStack = new Stack<>();
+			nodes.push(root);
+			treeStack.push(FirstScene.hierarchyTree.selected);
+
+			FirstScene.entityExplorer.Chosen = root;
+
 			Parent currentRoot = nodes.pop();
+			TreeItem<HBox> selected = FirstScene.hierarchyTree.selected;
 
 			String Line = null;
 			while ((Line = bufferedReader.readLine()) != null) {
+				FirstScene.hierarchyTree.selected = selected;
+				if (isFirst) {
+					isFirst = false;
+					continue;
+				}
 				if (Line.trim().startsWith("<")) {
 					String Line2 = Line.trim().split(" ")[0].substring(1);
 					Node node = (Node) Class.forName(Line2).newInstance();
 
+					setAttributes(node, Line);
 					TreeItem<HBox> treeItem = addItems(ItemLoader.LookUpName(node), ItemLoader.LookUpImage(node), node);
 
 					if (currentRoot instanceof Pane)
 						((Pane) currentRoot).getChildren().add(node);
-					else
+					else if (!(currentRoot instanceof Control))
 						((Group) currentRoot).getChildren().add(node);
 
 					if (node instanceof Parent && !(node instanceof Control)) {
 
-						nodes.add(currentRoot);
-						currentRoot = (Parent) node;
-						if (treeItem != null)
-							FirstScene.hierarchyTree.selected = treeItem;
+						nodes.push(currentRoot);
+						nodes.push((Parent) node);
+						currentRoot = nodes.pop();
 
+						FirstScene.entityExplorer.Chosen = currentRoot;
+
+						if (treeItem != null) {
+							treeStack.push(treeItem);
+							selected = treeStack.pop();
+						}
 					}
-					setAttributes(node, Line);
-				} else if (Line.endsWith(">")) {
+				} else if (Line.endsWith(">") && Line.length() != 1) {
 					Parent parent = nodes.pop();
 					if (parent instanceof Pane)
 						currentRoot = (Pane) parent;
 					else
 						currentRoot = parent;
+
+					FirstScene.entityExplorer.Chosen = currentRoot;
+
+					try {
+						selected = treeStack.pop();
+						FirstScene.hierarchyTree.selected = selected;
+					} catch (EmptyStackException e) {
+						continue;
+					}
+				} else if (Line.endsWith(">") && Line.length() == 1) {
+
 				}
 			}
 		} catch (Exception e) {
@@ -138,9 +167,8 @@ public class TreeReader {
 
 	public TreeItem<HBox> addItems(String string, Image image, Node node) {
 		Node newNode = node;
-		newNode.setId("" + (++EntityExplorer.ID));
-
-		// FirstScene.canvas.addItem(newNode);
+		EntityExplorer.ID++;
+		
 		if (FirstScene.hierarchyTree.selected != null) {
 			FirstScene.hierarchyTree.mainBox.setTranslateY(1);
 			if (FirstScene.hierarchyTree.mainBox instanceof Pane)
@@ -154,6 +182,7 @@ public class TreeReader {
 
 		final Node self = newNode;
 		newNode.setOnMousePressed(event2 -> {
+			System.out.println(node.getId());
 			Method[] field = self.getClass().getMethods();
 			List<String> strings = new ArrayList<>();
 			for (Method field2 : field) {
@@ -167,19 +196,22 @@ public class TreeReader {
 		});
 		newNode.setOnKeyPressed(KeyEvent -> {
 			if (KeyEvent.getCode() == KeyCode.DELETE) {
-				FirstScene.canvas.deleteItem(self);
-				FirstScene.hierarchyTree.DeleteItem(self);
-				FirstScene.attributesPanel.setAttributes(null, new String[0]);
+				if (self.equals(FirstScene.entityExplorer.Chosen)) {
+					BluePrintScene.nodeExplorer.removeNode(self.getId());
+					FirstScene.canvas.deleteItem(self);
+					FirstScene.hierarchyTree.DeleteItem(self);
+					FirstScene.attributesPanel.setAttributes(null, new String[0]);
+				}
 			}
 		});
 		try {
-			if(BluePrintScene.nodeExplorer == null) {
-				FirstScene.entityExplorer.Chosen = newNode ;
-				SceneManager.getSceneManager().refreshBlueprint();
+			if (BluePrintScene.nodeExplorer == null) {
+				FirstScene.entityExplorer.Chosen = newNode;
+				SceneManager.getSceneManager().refreshBlueprint(null);
 			}
 			Node BlueprintNode = node.getClass().newInstance();
-			BlueprintNode.setId(newNode.getId() + "BID");
-			BluePrintScene.nodeExplorer.addNode(string,image,BlueprintNode);
+			BlueprintNode.setId(node.getId() + "BID");
+			BluePrintScene.nodeExplorer.addNode(string, image, BlueprintNode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
